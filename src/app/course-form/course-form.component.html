@@ -1,0 +1,29 @@
+<form #form ngForm="form">
+  <br>
+
+  <div class="form-group">
+    <label for="course-name">Course:</label>
+    <input required minlength="3" ngModel name="name" #name='ngModel' id="course-name"  type="text" class="form-control">
+    <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+      <div *ngIf="name.errors.required">Name field is required</div>
+      <div *ngIf="name.errors.minlength">Name field should be at least {{ name.errors.minlength.requiredLength }} characters</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select id="category" class="form-control">
+      <option value=""></option>
+      <option *ngFor="let c of category" [value]="c.id">{{c.value}}</option>
+    </select>
+  </div>
+
+  <div class="form-check">
+    <input type="checkbox" id="has-garantee" class="form-check-input">
+    <label for="has-garantee" class="form-check-label">Has Garantee</label>
+  </div>
+
+  <br>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+</form>
