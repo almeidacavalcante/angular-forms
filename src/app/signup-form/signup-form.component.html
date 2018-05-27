@@ -1,13 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="login()">
     <br>
     <div *ngIf="form.errors" class="alert alert-danger">Invalid Username or Password!</div>
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input 
-            formControlName="username"
-            id="username" 
-            type="text" 
-            class="form-control">
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input formControlName="username" id="username" type="text" class="form-control">
         </div>
         <div *ngIf="username.pending" class="alert alert-warning">Checking for uniqueness...</div>
         <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
@@ -17,20 +14,20 @@
             <div *ngIf="username.errors.shouldBeUnique">This Username has been taken</div>
         </div>
 
-    <div class="form-group">
+        <div class="form-group">
+        </div>
         <label for="password">Password</label>
-        <input 
-            formControlName="password"    
-            id="password" 
-            type="text" 
-            class="form-control">
-    </div>
-    <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-        <div *ngIf="password.errors.required">Password is required</div>
-        <div *ngIf="password.errors.minlength">Password should be minimum {{ password.errors.minlength.requiredLength }} characters</div>
-        <div *ngIf="password.errors.cannotContainSpace">Username cannot contain white space</div>
+        <input formControlName="password" id="password" type="text" class="form-control">
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password should be minimum {{ password.errors.minlength.requiredLength }} characters</div>
+            <div *ngIf="password.errors.cannotContainSpace">Username cannot contain white space</div>
 
+        </div>
     </div>
-
+    
+    <br>
     <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Sign Up</button>
+    <hr>
+    <app-tag-list></app-tag-list>
 </form>

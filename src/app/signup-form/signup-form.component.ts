@@ -10,21 +10,23 @@ import { LoginValidators } from '../shared/validators/login-validators';
 export class SignupFormComponent {
 
   private form = new FormGroup({
-    username: new FormControl('', [
-
-      Validators.required,
-      Validators.minLength(3),
-      LoginValidators.cannotContainSpace
-
-    ], [LoginValidators.shouldBeUnique]),
-
-    password: new FormControl('', [
-
-      Validators.required,
-      Validators.minLength(8),
-      LoginValidators.cannotContainSpace
-
-    ])
+    account: new FormGroup({
+      username: new FormControl('', [
+  
+        Validators.required,
+        Validators.minLength(3),
+        LoginValidators.cannotContainSpace
+  
+      ], [LoginValidators.shouldBeUnique]),
+  
+      password: new FormControl('', [
+  
+        Validators.required,
+        Validators.minLength(8),
+        LoginValidators.cannotContainSpace
+  
+      ])
+    })
   })
 
   public login(){
@@ -39,11 +41,15 @@ export class SignupFormComponent {
     }
   }
 
+  get account() {
+    return this.form.get('account');
+  }
+
   get username() {
-    return this.form.get('username');
+    return this.account.get('username')
   }
 
   get password() {
-    return this.form.get('password');
+    return this.account.get('password')
   }
 }
